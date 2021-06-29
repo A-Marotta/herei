@@ -246,5 +246,5 @@ function runSQLBooking() {
     })
 }
 
-// runSQLQuery()
-runSQLBooking()
+runSQLQuery()
+//runSQLBooking()
