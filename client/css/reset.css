@@ -1,0 +1,30 @@
+/* Making the styles consistent across all pages  */
+* {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-size: inherit;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border: 0;
+}
