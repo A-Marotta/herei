@@ -19,7 +19,7 @@ CREATE TABLE attraction (
     state VARCHAR(200),
     country VARCHAR(200),
     maxCount INTEGER NOT NULL,
-    date TIMESTAMP NOT NULL,
+    date TIMESTAMP NOT NULL, -- adjust to array to allow multiple dates & times
     price FLOAT NOT NULL,
     create_at TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL-- belongs to users table (hosts user ID not the booking user)
@@ -31,4 +31,5 @@ CREATE TABLE bookings (
     users_id INTEGER NOT NULL, -- belongs to a user
     FOREIGN KEY (attraction_id) REFERENCES attraction (id) ON DELETE CASCADE, -- if a host user of an attraction is deleted then so will the bookings
     FOREIGN KEY (users_id) REFERENCES users (id) ON DELETE CASCADE -- if a host user of an attraction is deleted then so will the bookings
+    --**** INCLUDE COUNTS
 );

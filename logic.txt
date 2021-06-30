@@ -1,0 +1,17 @@
+
+1. basic landing page:
+    - search function
+    - user input location => attractions.
+
+2. attractions:
+    - takes searched location
+    - query database for searched location
+    - return full json of location attractions based on searched location
+    - response
+
+3.Bookings:
+    - Create booking
+    - Find Bookings
+    - Edit Booking
+    - Delete Booking
+
