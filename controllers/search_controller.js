@@ -4,7 +4,7 @@ const Attraction = require('../models/attraction.js')
 
 router.get('/api/attractions', (req, res) => {
     // let city = req.body.city >> TESTING
-    let city = req.params.city
+    let city = req.body.city
     Attraction
         .findAll(city)
         .then(dbRes => {

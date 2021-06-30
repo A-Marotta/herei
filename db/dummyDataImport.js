@@ -70,7 +70,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 10:00:00',
         price: 37.50,
         create_at: datetime,
         user_id: 1
@@ -84,7 +83,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 25,
-        date: '2021-07-10 11:00:00',
         price: 25,
         create_at: datetime,
         user_id: 1
@@ -98,7 +96,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 10:00:00',
         price: 120,
         create_at: datetime,
         user_id: 1
@@ -112,7 +109,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 15:00:00',
         price: 30,
         create_at: datetime,
         user_id: 2
@@ -126,7 +122,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 12:00:00',
         price: 60,
         create_at: datetime,
         user_id: 3
@@ -140,7 +135,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 10,
-        date: '2021-07-10 18:00:00',
         price: 40,
         create_at: datetime,
         user_id: 2
@@ -154,7 +148,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 18:30:00',
         price: 35,
         create_at: datetime,
         user_id: 2
@@ -168,7 +161,6 @@ const dummyAttraction = [
         state: "Victoria",
         country: "Australia",
         maxCount: 30,
-        date: '2021-07-10 08:30:00',
         price: 50,
         create_at: datetime,
         user_id: 5
@@ -177,28 +169,63 @@ const dummyAttraction = [
 
 const dummyBookings = [
     {
-        attraction_id: 1,
+        session_id: 1,
         users_id: 6,
     },
     {
-        attraction_id: 1,
+        session_id: 1,
         users_id: 7,
     },
     {
-        attraction_id: 1,
+        session_id: 1,
         users_id: 8,
     },
     {
-        attraction_id: 5,
+        session_id: 5,
         users_id: 6,
     },
     {
-        attraction_id: 6,
+        session_id: 6,
         users_id: 7,
     },
     {
-        attraction_id: 7,
+        session_id: 7,
         users_id: 8,
+    }
+]
+
+const dummySessions = [
+    {
+        attraction_id: 1,
+        datetime: '2021-07-10 10:00:00'
+    },
+    {
+        attraction_id: 1,
+        datetime: '2021-07-10 12:00:00'
+    },
+    {
+        attraction_id: 1,
+        datetime: '2021-07-10 15:30:00'
+    },
+    {
+        attraction_id: 2,
+        datetime: '2021-07-10 10:00:00'
+    },
+    {
+        attraction_id: 2,
+        datetime: '2021-07-11 10:00:00'
+    },
+    {
+        attraction_id: 4,
+        datetime: '2021-07-10 19:00:00'
+    },
+    {
+        attraction_id: 4,
+        datetime: '2021-07-10 19:30:00'
+    },
+    {
+        attraction_id: 4,
+        datetime: '2021-07-10 20:00:00'
     }
 ]
 
@@ -208,11 +235,16 @@ const sqlUser = `
 `
 
 const sqlAttraction = `
-    INSERT INTO attraction (title, description, lat, long, city, state, country, maxCount, date, price, create_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)    
+    INSERT INTO attraction (title, description, lat, long, city, state, country, maxCount, price, create_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)    
 `
 
 const sqlBookings = `
-    INSERT INTO bookings (attraction_id, users_id)
+    INSERT INTO bookings (session_id, users_id)
+    VALUES ($1, $2)
+`
+
+const sqlSession = `
+    INSERT INTO session (attraction_id, datetime)
     VALUES ($1, $2)
 `
 
@@ -231,7 +263,6 @@ function runSQLQuery() {
             attraction.state,
             attraction.country,
             attraction.maxCount,
-            attraction.date,
             attraction.price,
             attraction.create_at,
             attraction.user_id
@@ -241,9 +272,16 @@ function runSQLQuery() {
 
 function runSQLBooking() {
     dummyBookings.forEach(booking => {
-        db.query(sqlBookings, [booking.attraction_id, booking.users_id])
+        db.query(sqlBookings, [booking.session_id, booking.users_id])
     })
 }
 
-runSQLQuery()
-// runSQLBooking()
+function runSQLSession() {
+    dummySessions.forEach(session => {
+        db.query(sqlSession, [session.attraction_id, session.datetime])
+    })
+}
+
+// runSQLQuery() // Run 1st
+// runSQLSession() // Run 2nd
+runSQLBooking() // Run 3rd
