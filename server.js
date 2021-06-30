@@ -10,15 +10,33 @@ const path = require('path');
 
 app.set('view engine', 'ejs')
 
+app.use(express.static('public'))
+
 app.use(logger)
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json())
 
 app.get('/', (req, res) => {
     res.render('index.ejs')
 })
+
+app.get('/attraction_search', (req, res) => {
+    res.render('attraction_search.ejs')
+})
+
+app.get('/user/login', (req, res) => {
+    res.render('login.ejs')
+})
+
+// app.post('/user/login', (req, res) => {
+//     res.send('to do')
+// })
+
+app.get('/user/new', (req, res) => {
+    res.render('new_user.ejs')
+})
+
 app.use('/', bookingController)
 app.use('/', searchController)
 

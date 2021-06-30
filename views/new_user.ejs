@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>New User Profile</h2>
+    <form action="/user/new" class="user-new" method="post">
+        <div><input type="text" class="new-user-name" name="new-user-name" value="name" required></div>
+        <div><input type="email" class="new-user-email" name="new-user-email" value="email" required></div>
+        <div><input type="password" class="new-user-password-1" name= "new-user-password-1" value ="Password" required></div>
+        <div><input type="password" class="new-user-password-2" name= "new-user-password-2" value ="Confirm Password" required></div>
+        <div><button class="create-user-btn" type="submit" value="submit">Create Account</button></div>
+
+        <a href="/user/login" class="return-to-login">Return to Login</a>
+    </form>
+
+
+
+</body>
+</html>
