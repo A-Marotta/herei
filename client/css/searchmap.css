@@ -1,0 +1,77 @@
+* { 
+    /* border: 1px solid red; */
+}
+
+.containerWrapper {
+    display: flex;
+}
+
+.resultsLeftSide {
+    flex: 2.5;
+    padding: 20px;
+    max-height: 100vh;
+    overflow: scroll;
+    position: sticky;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(179, 179, 179);
+}
+
+form.searchAttraction button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; 
+    cursor: pointer;
+}
+
+form.searchAttraction button:hover {
+    background: #0b7dda;
+}
+
+form.searchAttraction::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.mapRightSide {
+    flex: 6;
+    max-height: 100%;
+}
+
+#bingMap {
+    height: calc(100vh - 40px);
+    overflow: hidden;
+}
+
+#bingMap:hover {
+    cursor: pointer;
+}
+
+#bingMap:active {
+    cursor: grab;
+}
+
+form.searchAttraction input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+

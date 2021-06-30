@@ -9,11 +9,11 @@ const bookingController = require('./controllers/booking_controller.js')
 const path = require('path');
 
 app.set('view engine', 'ejs')
-
 app.set('views', path.join(__dirname, 'client/views'))
 
-
 app.use(logger)
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(express.json())
 
@@ -25,8 +25,8 @@ app.use('/', searchController)
 
 
 
-app.get('/maptest', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/maptest.html'))
+app.get('/attractions', (req, res) => {
+    res.render('searchAttractions')
 })
 
 

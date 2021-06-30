@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <div className="login">
+        <div className="loginWrapper">
+            <div className="loginLeft">
+                <h3 className="loginLogo">Social App</h3>
+                <span className="loginDesc">Connect with friends and the worlds around you.</span>
+            </div>
+            <div className="loginRight">
+                <form className="loginBox" onSubmit={handleClick}>
+                    <input placeholder="Username" required ref={username} className="loginInput" />
+                    <input placeholder="Email" type="email" required ref={email} className="loginInput" />
+                    <input placeholder="Password" minLength="6" type="password" required ref={password} className="loginInput" />
+                    <input placeholder="Password Again" minLength="6" type="password" required ref={passwordAgain} className="loginInput" />
+                    <button className="loginButton" type="submit">Sign Up</button>
+                    <span className="loginForgot">Forgot Password?</span>
+                    <button className="loginRegisterButton">Log into Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
