@@ -3,8 +3,10 @@ const app = express()
 const port = process.env.PORT || 8080
 
 const logger = require('./middlewares/logger.js')
-const path = require('path');
 const pool = require('./models/db.js') // this will be removed at a later stage when creating the API endpoints
+const searchController = require('./controllers/search_controller.js')
+const bookingController = require('./controllers/booking_controller.js')
+const path = require('path');
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'client/views'))
