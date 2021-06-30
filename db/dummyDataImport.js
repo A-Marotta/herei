@@ -208,8 +208,7 @@ const sqlUser = `
 `
 
 const sqlAttraction = `
-    INSERT INTO attraction (title, description, lat, long, city, state, country, maxCount, date, price, create_at, user_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    INSERT INTO attraction (title, description, lat, long, city, state, country, maxCount, date, price, create_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)    
 `
 
 const sqlBookings = `
@@ -247,4 +246,4 @@ function runSQLBooking() {
 }
 
 runSQLQuery()
-//runSQLBooking()
+// runSQLBooking()
