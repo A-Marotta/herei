@@ -10,13 +10,10 @@ const path = require('path');
 
 app.set('view engine', 'ejs')
 
-app.set('views', path.join(__dirname, 'views'))
-
 app.use(express.static('public'))
 
 app.use(logger)
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(express.json())
 
@@ -42,7 +39,6 @@ app.get('/user/new', (req, res) => {
 
 app.use('/', bookingController)
 app.use('/', searchController)
-
 
 
 app.get('/attractions', (req, res) => {
