@@ -53,13 +53,6 @@ app.get('/', (req, res) => {
     res.render('index.ejs')
 });
 
-app.get('/attractions', (req, res) => {
-    res.render('searchAttractions')
-})
-app.get('/attraction_search', (req, res) => {
-    res.render('attraction_search.ejs')
-});
-
 app.get('/users/register', (req, res) => {
     res.render('register.ejs')
 });

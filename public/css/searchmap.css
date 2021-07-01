@@ -1,5 +1,10 @@
 * { 
     /* border: 1px solid red; */
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    overflow: hidden;
 }
 
 .containerWrapper {
@@ -12,6 +17,14 @@
     max-height: 100vh;
     overflow: scroll;
     position: sticky;
+    overflow-x: hidden; 
+}
+
+.left-side-tittle {
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
 }
 
 ::-webkit-scrollbar {
@@ -24,6 +37,79 @@
 
 ::-webkit-scrollbar-thumb {
     background-color: rgb(179, 179, 179);
+}
+
+.attraction {
+    display: flex;
+    padding: 40px 0;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.attraction-image {
+    flex: 2.5;
+    padding-right: 10px;
+}
+
+.attraction-image img {
+    height: 100%;
+    object-fit: cover;
+    max-height: 155px;
+}
+
+.attraction-details {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.attraction-title {
+    font-size: 22px;
+    padding-bottom: 10px;
+}
+
+.attraction-description {
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.attraction-bottomWrapper {
+    display: flex;
+}
+
+.attraction-sessions {
+    flex: 4;
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.attraction-price {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.price-per {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.attraction-session-book {
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #2196F3;
+    border: 1px #2196F3;
+    color: white;
+    font-weight: 600;
+}
+
+.attraction-session-book:hover {
+    background-color: #8e8e8e;
+    cursor: pointer;
 }
 
 form.searchAttraction button {
@@ -55,7 +141,6 @@ form.searchAttraction::after {
 
 #bingMap {
     height: calc(100vh - 40px);
-    overflow: hidden;
 }
 
 #bingMap:hover {
