@@ -1,0 +1,5 @@
+HOST = // email host
+USER = // email id
+PASS = // email password
+SERVICE = // email service
+BASE_URL = 'http://localhost:8080/api'
