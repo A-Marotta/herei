@@ -16,6 +16,7 @@ router.get('/users/login', (req, res) => {
 });
 
 router.get('/users/playground', (req, res) => {
+    console.log(req.user); // User session information
     res.render('playground.ejs', { user: req.user.name })
 });
 

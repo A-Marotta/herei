@@ -1,5 +1,4 @@
-HOST = // email host
-USER = // email id
-PASS = // email password
-SERVICE = // email service
-BASE_URL = 'http://localhost:8080/api'
+EMAIL_USER = <YOUR PERSONAL EMAIL FOR testing>
+PASS = <YOUR PERSONAL EMAIL PASSWORD>
+SERVICE = <YOUR PERSONAL EMAIL SMTP SERVER ADDRESS>
+BASE_URL = http://localhost:8080
