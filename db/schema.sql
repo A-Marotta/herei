@@ -32,6 +32,14 @@ CREATE TABLE session (
     FOREIGN KEY (attraction_id) REFERENCES attraction (id) ON DELETE CASCADE
 );
 
+CREATE TABLE user_session (
+    id SERIAL PRIMARY KEY NOT NULL,
+    session_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES session (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY NOT NULL,
     session_id INTEGER NOT NULL, -- belongs to a attraction
