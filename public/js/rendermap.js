@@ -102,6 +102,7 @@ function createAttractionInfo(leftMenu, data) {
                 let sessiontime = document.createElement('option')
                 const sessionDateTime = formatSessionDateTime(session[i].datetime)
                 sessiontime.text = sessionDateTime
+                sessiontime.setAttribute("value", session[i].id);
                 attractionSessions.add(sessiontime)
             }
         }
@@ -118,7 +119,9 @@ function createAttractionInfo(leftMenu, data) {
 
     let attractionBookBtn = document.createElement('button')
     attractionBookBtn.className = 'attraction-session-book'
+    attractionBookBtn.setAttribute('attraction-id', data.id)
     attractionBookBtn.textContent = 'BOOK NOW'
+    attractionBookBtn.addEventListener('click', setButtonFunctionality)
 
     leftMenu.appendChild(attraction)
     attraction.appendChild(attractionDetails)
@@ -129,7 +132,7 @@ function createAttractionInfo(leftMenu, data) {
     bottomWrapper.appendChild(attractionPrice)
     attractionPrice.appendChild(pricePer)
     
-    attractionDetails.appendChild(attractionBookBtn)
+    attractionDetails.appendChild(attractionBookBtn)    
 }
 
 function getAvailableSessions(data) {
@@ -147,7 +150,7 @@ function getMapAttractions(city) {
 }
 
 function getAttractionSessions(id) {
-    const promise = axios.get(`http://localhost:8080/api/sessions/${id}`)
+    const promise = axios.get(`http://localhost:8080/api/timeslots/${id}`)
     const dataPromise = promise.then((response) => response.data)
     return dataPromise  
 }
@@ -182,3 +185,22 @@ function getMonth(index) {
 
     return months[index]
 }
+
+function setButtonFunctionality(e) {
+    e.preventDefault()
+    const session_id = document.querySelector('.attraction-sessions').value
+    const attraction_id = e.target.attributes['attraction-id'].value
+    // console.log(typeof session_id)
+
+    axios.post(`/create-checkout-session`)
+    // Make an axios call to stripe for checkout
+    // .then function (if successful make another axios to book the session)
+    // else if stripe call fails ... TBC
+        // axios.post(`/api/sessions/${session_id}`)
+    
+}
+
+// const attraction_id = e.target.attributes['attraction-id'].value
+// axios.post(`/api/sessions/${attraction_id}`)
+
+//pk_test_51J8IVLK85xB9CLmPbXgXCOwHwRxTNfIOq4D6kwvk5qGu0vY1AbHYUIlYSWn2W7ikWtPIZ8diRFh3j5remuVvS9pC00zLS8uvYi

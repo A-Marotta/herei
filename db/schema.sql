@@ -40,6 +40,10 @@ CREATE TABLE user_session (
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+INSERT INTO user_session (session_id, user_id) VALUES (1, 1);
+INSERT INTO user_session (session_id, user_id) VALUES (1, 2);
+INSERT INTO user_session (session_id, user_id) VALUES (1, 3);
+
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY NOT NULL,
     session_id INTEGER NOT NULL, -- belongs to a attraction

@@ -22,7 +22,7 @@ router.get('/api/attractions/:id', (req, res) => {
             res.status(200).json(dbRes.rows[0])
         })
 })
-router.get('/api/sessions/:id', (req, res) => {
+router.get('/api/timeslots/:id', (req, res) => {
     Attraction
         .findSessions(req.params.id)
         .then(dbRes => {
