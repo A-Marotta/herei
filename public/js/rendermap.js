@@ -117,10 +117,16 @@ function createAttractionInfo(leftMenu, data) {
     pricePer.className = 'price-per'
     pricePer.textContent = 'p'
 
+    let bookForm = document.createElement('form')
+    bookForm.className = 'book-now-form'
+    bookForm.method = 'POST'
+    bookForm.action = `/api/create-checkout-session/${data.id}`
+
     let attractionBookBtn = document.createElement('button')
     attractionBookBtn.className = 'attraction-session-book'
     attractionBookBtn.setAttribute('attraction-id', data.id)
     attractionBookBtn.textContent = 'BOOK NOW'
+    attractionBookBtn.setAttribute("type", "submit")
     attractionBookBtn.addEventListener('click', setButtonFunctionality)
 
     leftMenu.appendChild(attraction)
@@ -132,7 +138,8 @@ function createAttractionInfo(leftMenu, data) {
     bottomWrapper.appendChild(attractionPrice)
     attractionPrice.appendChild(pricePer)
     
-    attractionDetails.appendChild(attractionBookBtn)    
+    attractionDetails.appendChild(bookForm)    
+    bookForm.appendChild(attractionBookBtn)
 }
 
 function getAvailableSessions(data) {
@@ -187,16 +194,21 @@ function getMonth(index) {
 }
 
 function setButtonFunctionality(e) {
-    e.preventDefault()
     const session_id = document.querySelector('.attraction-sessions').value
     const attraction_id = e.target.attributes['attraction-id'].value
     // console.log(typeof session_id)
 
-    axios.post(`/create-checkout-session`)
+    // stripePayment()
+
+    // axios.post(`/create-checkout-session`)
     // Make an axios call to stripe for checkout
     // .then function (if successful make another axios to book the session)
     // else if stripe call fails ... TBC
         // axios.post(`/api/sessions/${session_id}`)
+    
+}
+
+function stripePayment() {
     
 }
 
