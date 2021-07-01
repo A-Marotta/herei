@@ -39,9 +39,7 @@ app.use('/', bookingController)
 app.use('/', searchController)
 
 
-app.get('/attractions', (req, res) => {
-    res.render('searchAttractions')
-})
+
 
 
 
