@@ -3,7 +3,7 @@ const router = express.Router()
 const Attraction = require('../models/attraction.js')
 
 router.get('/attractions', (req, res) => {
-    res.render('searchAttractions')
+    res.render('searchAttractions.ejs')
 })
 
 router.get('/api/attractions/search/:city', (req, res) => {
