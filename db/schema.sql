@@ -15,6 +15,7 @@ CREATE TABLE attraction (
     description VARCHAR(800),
     lat FLOAT NOT NULL,
     long FLOAT NOT NULL,
+    img TEXT,
     city VARCHAR(200),
     state VARCHAR(200),
     country VARCHAR(200),

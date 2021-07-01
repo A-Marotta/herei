@@ -66,6 +66,7 @@ const dummyAttraction = [
         description: "Sightseeing tour agency in the City of Melbourne, Victoria",
         lat: -37.80220437586521,
         long: 144.9687826104149,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUcUKz5O6CnbIPUN_OYAIxYIzOTQlnxOt9hg&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -79,6 +80,7 @@ const dummyAttraction = [
         description: "At Walk Melbourne Tours, we love to share Melbourne's stories through food. Coffee, dumplings, sweets and bars are our favorite things.",
         lat: -37.80220538474754,
         long: 145.00096911859362,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAz1j0Sh1MJfRnM3QA5vR30bilL21vMv2m_Q&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -92,6 +94,7 @@ const dummyAttraction = [
         description: "Spa in Southbank, Victoria",
         lat: -37.83246010626527,
         long: 144.93334995186427,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs2VaeSipIqgwF8RGXv8gaptOaNIhEZ32khA&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -105,6 +108,7 @@ const dummyAttraction = [
         description: "Sightseeing tour agency in the City of Melbourne, Victoria",
         lat: -37.81202429790582,
         long: 144.97713695455317,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo_wHWYhAp0hck_EQ-qI1cvTW2ythTrlHrFQ&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -118,6 +122,7 @@ const dummyAttraction = [
         description: "Massage spa in Docklands, Victoria",
         lat: -37.82025694504295,
         long: 144.96553646004298,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8CSJJhLrfre-qTntWzH72TZRCmQgQHpKr5A&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -131,6 +136,7 @@ const dummyAttraction = [
         description: "Tourist attraction in the City of Melbourne, Victoria",
         lat: -37.81705225725522,
         long: 144.95636947184306,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8CfDLyN6hxaT6TWmtP6V0-CwVDlZhoe2KBQ&usqp=CAU',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -144,6 +150,7 @@ const dummyAttraction = [
         description: "Tourist attraction in the City of Melbourne, Victoria",
         lat: -37.81374674365602,
         long: 144.96441609888774,
+        img: 'https://sta1.s3.amazonaws.com/organisers/509945/n_kXSlpXPEqKdmpTeFmZLw_500_500_Max.png',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -157,6 +164,7 @@ const dummyAttraction = [
         description: "Sea Life Melbourne Aquarium is a Southern Ocean and Antarctic aquarium in central Melbourne, Australia.",
         lat: -37.81566751690223,
         long: 144.9650331347265,
+        img: 'https://anydayadventuresblog.files.wordpress.com/2017/03/0c0196d0c31e9e4286e120d6b5ea0a93f26d2538.jpg?w=500',
         city: "Melbourne",
         state: "Victoria",
         country: "Australia",
@@ -235,7 +243,7 @@ const sqlUser = `
 `
 
 const sqlAttraction = `
-    INSERT INTO attraction (title, description, lat, long, city, state, country, maxCount, price, create_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)    
+    INSERT INTO attraction (title, description, lat, long, img, city, state, country, maxCount, price, create_at, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)    
 `
 
 const sqlBookings = `
@@ -259,6 +267,7 @@ function runSQLQuery() {
             attraction.description,
             attraction.lat,
             attraction.long,
+            attraction.img,
             attraction.city,
             attraction.state,
             attraction.country,

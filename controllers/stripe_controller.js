@@ -18,11 +18,11 @@ router.post('/api/create-checkout-session/:id', async (req, res) => {
                 currency: 'aud',
                 product_data: {
                 name: attractionData.title,
-                images: ['https://i.imgur.com/EHyR2nP.png'],
+                images: [attractionData.img],
                 },
                 unit_amount: `${attractionData.price}00`,
             },
-            quantity: 1,
+            quantity: req.body['num-of-persons'],
             },
         ],
         mode: 'payment',
