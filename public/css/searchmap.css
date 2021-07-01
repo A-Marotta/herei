@@ -52,7 +52,7 @@ html {
 
 .attraction-image img {
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     max-height: 155px;
 }
 
@@ -74,15 +74,22 @@ html {
     font-weight: 400;
 }
 
-.attraction-bottomWrapper {
+.book-now-form {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .attraction-sessions {
-    flex: 4;
+    flex: 1;
     margin: 0;
     display: flex;
     align-items: flex-end;
+    margin-right: 10px;
+}
+
+.attraction-person-count {
+    flex: 0.5;
 }
 
 .attraction-price {

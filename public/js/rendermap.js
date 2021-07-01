@@ -68,7 +68,7 @@ function createAttractionInfo(leftMenu, data) {
 
     let attractionImg =  document.createElement('img')
     attractionImg.className = 'attraction-image'
-    attractionImg.setAttribute("src", "https://placedog.net/900/1200")
+    attractionImg.setAttribute("src", data.img)
 
     leftMenu
         .appendChild(attraction)
@@ -85,9 +85,6 @@ function createAttractionInfo(leftMenu, data) {
     let attractionDescription = document.createElement('h4')
     attractionDescription.className = 'attraction-description'
     attractionDescription.textContent = data.description
-
-    let bottomWrapper = document.createElement('div')
-    bottomWrapper.className = 'attraction-bottomWrapper'
 
     let attractionSessions = document.createElement('select')
     attractionSessions.className = 'attraction-sessions'
@@ -108,6 +105,15 @@ function createAttractionInfo(leftMenu, data) {
         }
     })
 
+    let personCount = document.createElement('select')
+    personCount.className = 'attraction-person-count'
+    personCount.setAttribute('name', 'num-of-persons')
+    for ( var i = 0; i < data.maxcount; i++) {
+        let countValue = document.createElement('option')
+        countValue.text = i+1
+        countValue.setAttribute("value", i+1);
+        personCount.add(countValue)        
+    }
 
     let attractionPrice = document.createElement('h3')
     attractionPrice.className = 'attraction-price'
@@ -133,9 +139,9 @@ function createAttractionInfo(leftMenu, data) {
     attraction.appendChild(attractionDetails)
     attractionDetails.appendChild(attractionTitle)
     attractionDetails.appendChild(attractionDescription)
-    attractionDetails.appendChild(bottomWrapper)
-    bottomWrapper.appendChild(attractionSessions)
-    bottomWrapper.appendChild(attractionPrice)
+    bookForm.appendChild(attractionSessions)
+    bookForm.appendChild(personCount)
+    bookForm.appendChild(attractionPrice)
     attractionPrice.appendChild(pricePer)
     
     attractionDetails.appendChild(bookForm)    
