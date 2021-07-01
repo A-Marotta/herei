@@ -37,7 +37,8 @@ function importMapLocations() {
                         const location = new Microsoft.Maps.Location(pin.lat, pin.long)
                         var pinDetails = new Microsoft.Maps.Pushpin(location, {
                             title: pin.title,
-                            text: pin.id
+                            text: pin.id,
+                            color: 'red'
                         });
                         map.entities.push(pinDetails);
 
@@ -133,7 +134,6 @@ function createAttractionInfo(leftMenu, data) {
     attractionBookBtn.setAttribute('attraction-id', data.id)
     attractionBookBtn.textContent = 'BOOK NOW'
     attractionBookBtn.setAttribute("type", "submit")
-    attractionBookBtn.addEventListener('click', setButtonFunctionality)
 
     leftMenu.appendChild(attraction)
     attraction.appendChild(attractionDetails)
@@ -199,26 +199,8 @@ function getMonth(index) {
     return months[index]
 }
 
-function setButtonFunctionality(e) {
-    const session_id = document.querySelector('.attraction-sessions').value
-    const attraction_id = e.target.attributes['attraction-id'].value
-    // console.log(typeof session_id)
 
-    // stripePayment()
-
-    // axios.post(`/create-checkout-session`)
-    // Make an axios call to stripe for checkout
-    // .then function (if successful make another axios to book the session)
-    // else if stripe call fails ... TBC
-        // axios.post(`/api/sessions/${session_id}`)
-    
-}
-
-function stripePayment() {
-    
-}
-
+// const session_id = document.querySelector('.attraction-sessions').value
 // const attraction_id = e.target.attributes['attraction-id'].value
-// axios.post(`/api/sessions/${attraction_id}`)
 
 //pk_test_51J8IVLK85xB9CLmPbXgXCOwHwRxTNfIOq4D6kwvk5qGu0vY1AbHYUIlYSWn2W7ikWtPIZ8diRFh3j5remuVvS9pC00zLS8uvYi
