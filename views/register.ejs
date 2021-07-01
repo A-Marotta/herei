@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <title>Document</title>
 </head>
 <body>
-    <div className="login">
-        <div className="loginWrapper">
-            <div className="loginLeft">
-                <h3 className="loginLogo">Social App</h3>
-                <span className="loginDesc">Connect with friends and the worlds around you.</span>
+    <h1>Register</h1>
+    <ul>
+      <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+      <li><%= error.message %></li>
+      <% }) %> <% } %>
+    </ul>
+
+
+        <form action="/users/register" method="post">
+            <div>
+                <input type="text" id="name" name="name" placeholder="Name" required>
             </div>
-            <div className="loginRight">
-                <form className="loginBox" onSubmit={handleClick}>
-                    <input placeholder="Username" required ref={username} className="loginInput" />
-                    <input placeholder="Email" type="email" required ref={email} className="loginInput" />
-                    <input placeholder="Password" minLength="6" type="password" required ref={password} className="loginInput" />
-                    <input placeholder="Password Again" minLength="6" type="password" required ref={passwordAgain} className="loginInput" />
-                    <button className="loginButton" type="submit">Sign Up</button>
-                    <span className="loginForgot">Forgot Password?</span>
-                    <button className="loginRegisterButton">Log into Account</button>
-                </form>
+            <div>
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
-        </div>
-    </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+             <div>
+                <input type="password" id="password2" name="password2" placeholder="Confirmed Password" required>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
+            <a href="/users/login">Already Registered? Login here </a>
+        </form>
 </body>
 </html>

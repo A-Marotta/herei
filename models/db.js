@@ -1,14 +1,16 @@
-const {Pool} =  require('pg')
+require('dotenv').config()
+
+const { Pool } = require('pg')
 
 let pool;
 if (process.env.PRODUCTION) {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  })
+    pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+    })
 } else {
-  pool = new Pool({
-    database: 'herei'
-  })
+    pool = new Pool({
+        database: 'herei'
+    })
 }
 
 module.exports = pool
