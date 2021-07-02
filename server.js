@@ -42,6 +42,7 @@ app.use(express.json());
 // Controller
 const logger = require('./middlewares/logger.js');
 app.use(logger);
+const {logError, returnError} = require('./middlewares/error_handler.js')
 const searchController = require('./controllers/search_controller.js');
 const bookingController = require('./controllers/booking_controller.js');
 const userController = require('./controllers/user_controller.js');
@@ -64,12 +65,11 @@ app.get('/success', (req, res) => {
     res.render('success.ejs')
 });
 
-
-
 app.use('/', searchController)
 app.use('/', bookingController)
 app.use('/', userController)
 app.use('/', sessionController)
 app.use("/", stripeController);
-// app.use(errorHandler)
-
+//app.use(errorHandler) //***dt-taught error handler kept incase of issues with below*/
+app.use(logError)
+app.use(returnError)
