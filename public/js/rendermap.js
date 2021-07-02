@@ -1,7 +1,14 @@
 const searchForm = document.querySelector('.search-input')
+const attractionView = document.querySelector('.user-view-attraction')
+const sessionView = document.querySelector('.user-view-selection')
+
 const searchBtn = document.querySelector('.search-btn')
+const viewAttractionBtn = document.querySelector('.attraction-results-btn')
+const viewSessionsBtn = document.querySelector('.user-sessions-results-btn')
 
 searchBtn.addEventListener('click', handleSearchCity)
+viewAttractionBtn.addEventListener('click', handleViewAttraction)
+viewSessionsBtn.addEventListener('click', handleViewSession)
 
 function GetMap()
 {
@@ -55,12 +62,13 @@ function importMapLocations() {
 
 function importSideAttractions(data) {
     const leftMenu = document.querySelector('.resultsLeftSide')
-
-    createAttractionInfo(leftMenu, data)
+    createAttractionInfo(leftMenu, attractionView, data)
 
 }
 
-function createAttractionInfo(leftMenu, data) {
+function createAttractionInfo(leftMenu, attractionView, data) {
+    attractionView.style.display = 'contents'
+
     let attraction = document.createElement('div')
     attraction.className = 'attraction'
 
@@ -71,7 +79,7 @@ function createAttractionInfo(leftMenu, data) {
     attractionImg.className = 'attraction-image'
     attractionImg.setAttribute("src", data.img)
 
-    leftMenu
+    attractionView
         .appendChild(attraction)
         .appendChild(attractionImgDiv)
         .appendChild(attractionImg)
@@ -138,7 +146,7 @@ function createAttractionInfo(leftMenu, data) {
     attractionBookBtn.textContent = 'BOOK NOW'
     attractionBookBtn.setAttribute("type", "submit")
 
-    leftMenu.appendChild(attraction)
+    attractionView.appendChild(attraction)
     attraction.appendChild(attractionDetails)
     attractionDetails.appendChild(attractionTitle)
     attractionDetails.appendChild(attractionDescription)
@@ -194,6 +202,21 @@ function getMonth(index) {
     return months[index]
 }
 
+function handleViewAttraction() {
+    attractionView.style.display = 'contents'
+    sessionView.style.display = 'none'
+}
+
+function handleViewSession() {
+    attractionView.style.display = 'none'
+    sessionView.style.display = 'contents'
+
+    getUserSessions()
+}
+
+function getUserSessions() {
+    console.log(req.session.passport.user)
+}
 
 // const session_id = document.querySelector('.attraction-sessions').value
 // const attraction_id = e.target.attributes['attraction-id'].value

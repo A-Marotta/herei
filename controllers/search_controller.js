@@ -7,6 +7,10 @@ router.get('/attractions', (req, res) => {
 })
 
 router.get('/api/attractions/search/:city', (req, res) => {
+    console.log(`id: ${req.session.passport.user}`)
+
+    // if(!req.session.passport.user)
+
     const city = req.params.city
     Attraction
         .findAll(city)
