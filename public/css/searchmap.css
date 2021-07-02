@@ -21,10 +21,10 @@ html {
 }
 
 .left-side-tittle {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
     font-size: 36px;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 ::-webkit-scrollbar {
@@ -37,6 +37,37 @@ html {
 
 ::-webkit-scrollbar-thumb {
     background-color: rgb(179, 179, 179);
+}
+
+.btn-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.attraction-results-btn, .user-sessions-results-btn  {
+    width: 50%;
+    padding: 10px;
+    font-weight: 300;
+    font-size: 16px;    
+    border: none;
+    background: center;
+}
+
+.user-sessions-results-btn {
+    border-left: 1px solid gray;
+}
+
+.attraction-results-btn:hover, .user-sessions-results-btn:hover {
+    cursor: pointer;
+    color: gray;
+}
+
+.user-view-attraction {
+    display: none;
+}
+
+.user-view-selection {
+    display: none;
 }
 
 .attraction {
@@ -167,3 +198,6 @@ form.searchAttraction input[type=text] {
     background: #f1f1f1;
 }
 
+.hidden {
+    display: none;
+}
