@@ -5,7 +5,8 @@ CREATE DATABASE herei;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR(200) UNIQUE NOT NULL, 
-    name VARCHAR(200) NOT NULL, 
+    name VARCHAR(200) NOT NULL,
+--     verified BOOLEAN NOT NULL,
     password_digest TEXT NOT NULL
 );
 

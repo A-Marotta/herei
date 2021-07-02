@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const passport = require("passport");
+const nodemailer = require("nodemailer");
 const initializePassport = require("../passportConfig");
 initializePassport(passport);
 const pool = require('../models/db')
@@ -15,6 +16,7 @@ router.get('/users/login', (req, res) => {
 });
 
 router.get('/users/playground', (req, res) => {
+    console.log(req.user); // User session information
     res.render('playground.ejs', { user: req.user.name })
 });
 
@@ -81,19 +83,80 @@ router.post('/users/register', async(req, res) => {
                         `INSERT INTO users (name, email, password_digest)
                             VALUES ($1, $2, $3)
                             RETURNING id, password_digest`, [name, email, hashedPassword],
-                        (err, results) => {
+                        async (err, results) => {
                             if (err) {
                                 throw err;
                             }
                             console.log(results.rows);
-                            req.flash("success_msg", "You are now registered. Please verified your account by Email");
-                            res.redirect("/users/login");
+                            try {
+                                await sendEmail(`${email}`, "Verify Email", `Please click <a href="${process.env.BASE_URL}/users/verify?user_email=${email}">link</a> to confirm.`);
+                                req.flash("success_msg", "You are now registered. Please verified your account by Email");
+                                res.redirect("/users/login");
+                            } catch(error) {
+                                return res.status(404).send(error.toString());
+                            }
+
                         }
                     )
                 }
             }
         )
 
+    }
+});
+
+router.get('/users/verify', async(req, res) => {
+    const email = req.query.user_email;
+    if (!email) {
+        return res.status(400).send("invalid user email");
+    }
+    return pool.query(
+        `SELECT * FROM users WHERE email = $1`, [email], async(err, result) => {
+            if (err || result.rows.length !== 1) {
+                res.status(500).send("unable to validate user email");
+            }
+            console.log(result.rows[0]);
+            req.flash("success_msg", "You are now verified.");
+            res.redirect("/users/login");
+        });
+
+});
+
+const sendEmail = async (email, subject, html) => {
+    try {
+        console.log(process.env.SERVICE);
+        console.log(process.env.USER);
+        console.log(process.env.PASS);
+
+        const transporter = nodemailer.createTransport({
+            host: process.env.SERVICE,
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.PASS,
+            },
+        });
+
+        await transporter.sendMail({
+            from: `"HereI" <process.env.EMAIL_USER>`,
+            to: email,
+            subject: subject,
+            html: html,
+        });
+        console.log("email sent sucessfully");
+    } catch (error) {
+        console.log("email not sent");
+        console.log(error);
+    }
+};
+
+router.post('/email', async(req, res)=> {
+    try {
+        await sendEmail("gigi.cai0310@gmail.com", "Verify Email", "Congratulations. Your email address is verified.");
+        return res.status(200).send("done");
+    } catch(error) {
+        return res.status(404).send(error.toString());
     }
 });
 
