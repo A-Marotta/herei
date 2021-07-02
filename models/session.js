@@ -24,6 +24,14 @@ const Session = {
         `
         return db.query(sql, [user_id])
     },
+    findSessionById: (session_id) => {
+        const sql = `
+            SELECT * FROM session 
+            LEFT JOIN attraction ON session.attraction_id = attraction.id WHERE (
+            session.id = $1);
+        `
+        return db.query(sql, [session_id])
+    },
     // Creating a booked session
     create: (session_id, user_id) => {
         const sql = `
