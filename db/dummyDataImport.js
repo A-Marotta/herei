@@ -17,51 +17,49 @@ function synchronousHashing(password) {
 
 const datetime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-const dummyUser = [
-    {
+const dummyUser = [{
         email: "karen@gmail.com",
         name: "Karen",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "cameron@gmail.com",
         name: "Cameron",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "adrian@gmail.com",
         name: "Adrian",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "john@gmail.com",
         name: "John",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "jane@gmail.com",
         name: "jane",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "user1@gmail.com",
         name: "user1",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "user2@gmail.com",
         name: "user2",
         password: synchronousHashing('123456')
-    }, 
+    },
     {
         email: "user3@gmail.com",
         name: "user3",
         password: synchronousHashing('123456')
-    }, 
+    },
 ]
 
-const dummyAttraction = [
-    {
+const dummyAttraction = [{
         title: "I'm Free Walking Tours Melbourne",
         description: "Sightseeing tour agency in the City of Melbourne, Victoria",
         lat: -37.80220437586521,
@@ -175,8 +173,7 @@ const dummyAttraction = [
     }
 ]
 
-const dummyBookings = [
-    {
+const dummyBookings = [{
         session_id: 1,
         users_id: 6,
     },
@@ -202,8 +199,7 @@ const dummyBookings = [
     }
 ]
 
-const dummySessions = [
-    {
+const dummySessions = [{
         attraction_id: 1,
         datetime: '2021-07-10 10:00:00'
     },
@@ -263,7 +259,7 @@ function runSQLQuery() {
 
     dummyAttraction.forEach(attraction => {
         db.query(sqlAttraction, [
-            attraction.title, 
+            attraction.title,
             attraction.description,
             attraction.lat,
             attraction.long,
