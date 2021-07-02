@@ -1,5 +1,12 @@
 const nodemailer = require("nodemailer");
 
+/**
+ *
+ * @param email  Customer's email
+ * @param subject Email Subject
+ * @param html   Email html template
+ * @returns {Promise<void>}
+ */
 const sendEmail = async (email, subject, html) => {
     try {
         console.log(process.env.SERVICE);
