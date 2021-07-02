@@ -89,18 +89,21 @@ function createAttractionInfo(leftMenu, data) {
 
     let attractionSessions = document.createElement('select')
     attractionSessions.className = 'attraction-sessions'
+    attractionSessions.setAttribute('name', 'session-datetime')
+    
 
     getAttractionSessions(data.id).then(session =>  {
         if (session.length === 0) {
             let sessiontime = document.createElement('option')
             sessiontime.text = 'No available sessions'
+            sessiontime.setAttribute("value", 0)
             attractionSessions.add(sessiontime)
         } else {
             for ( var i = 0; i < session.length; i++) {
                 let sessiontime = document.createElement('option')
                 const sessionDateTime = formatSessionDateTime(session[i].datetime)
                 sessiontime.text = sessionDateTime
-                sessiontime.setAttribute("value", session[i].id);
+                sessiontime.setAttribute("value", session[i].id)
                 attractionSessions.add(sessiontime)
             }
         }
@@ -112,7 +115,7 @@ function createAttractionInfo(leftMenu, data) {
     for ( var i = 0; i < data.maxcount; i++) {
         let countValue = document.createElement('option')
         countValue.text = i+1
-        countValue.setAttribute("value", i+1);
+        countValue.setAttribute("value", i+1)
         personCount.add(countValue)        
     }
 
@@ -146,14 +149,6 @@ function createAttractionInfo(leftMenu, data) {
     
     attractionDetails.appendChild(bookForm)    
     bookForm.appendChild(attractionBookBtn)
-}
-
-function getAvailableSessions(data) {
-    const sessions = getAttractionSessions(data.id)
-        .then(session => {
-            console.log(session)
-        })
-    
 }
 
 function getMapAttractions(city) {
