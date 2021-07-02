@@ -170,6 +170,48 @@ const dummyAttraction = [{
         price: 50,
         create_at: datetime,
         user_id: 5
+    },
+    {
+        title: "SEA LIFE Sydney Aquarium ",
+        description: "Glass viewing tunnels allow patrons to observe Australia's freshwater & marine aquatic environments",
+        lat: -33.8695997,
+        long: 151.1999494,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN3chUku9rFeS9CR3aXPg-IlCDB9M97Q8YFQ&usqp=CAU',
+        city: "Sydney",
+        state: "New South Wales",
+        country: "Australia",
+        maxCount: 15,
+        price: 50,
+        create_at: datetime,
+        user_id: 5
+    },
+    {
+        title: "WILD LIFE Sydney Zoo",
+        description: "Unique zoo featuring native animals in walk-through habitats, plus daily shows & feeding sessions.",
+        lat: -33.8660998,
+        long: 151.1942071,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWO2l7u6IA3L3YYNIFpPVgOr-dKuq5Mj1uKA&usqp=CAU',
+        city: "Sydney",
+        state: "New South Wales",
+        country: "Australia",
+        maxCount: 20,
+        price: 50,
+        create_at: datetime,
+        user_id: 5
+    },
+    {
+        title: "Sydney Harbour Bridge",
+        description: "Iconic structure opened in 1932, offering a BridgeClimb & the Pylon Lookout, hosting exhibitions.",
+        lat: -33.8523183,
+        long: 151.2048212,
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYtx2Qprm4JjeHxXb-YAEAbieJMWhk4SWC_g&usqp=CAU',
+        city: "Sydney",
+        state: "New South Wales",
+        country: "Australia",
+        maxCount: 50,
+        price: 50,
+        create_at: datetime,
+        user_id: 5
     }
 ]
 

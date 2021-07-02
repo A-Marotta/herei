@@ -42,9 +42,12 @@ CREATE TABLE user_session (
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-INSERT INTO user_session (session_id, user_id) VALUES (1, 1);
-INSERT INTO user_session (session_id, user_id) VALUES (1, 2);
-INSERT INTO user_session (session_id, user_id) VALUES (1, 3);
+-- INSERT INTO user_session (session_id, user_id) VALUES (1, 1);
+-- INSERT INTO user_session (session_id, user_id) VALUES (1, 2);
+-- INSERT INTO user_session (session_id, user_id) VALUES (1, 3);
+-- INSERT INTO user_session (session_id, user_id) VALUES (9, 3);
+
+-- INSERT INTO session (attraction_id, guest_count, datetime) VALUES (1, 30, '2019-20-10 10:00:00');
 
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY NOT NULL,

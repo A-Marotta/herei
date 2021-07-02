@@ -7,7 +7,7 @@ router.get('/attractions', (req, res) => {
 })
 
 router.get('/api/attractions/search/:city', (req, res) => {
-    console.log(`id: ${req.session.passport.user}`)
+    // console.log(`id: ${req.session.passport.user}`)
 
     // if(!req.session.passport.user)
 
