@@ -6,6 +6,8 @@ const session = require('express-session');
 const flash = require('express-flash');
 const passport = require("passport");
 const initializePassport = require("./passportConfig");
+const sendMail = require("./email_notification/send");
+const Session = require('./models/session.js')
 initializePassport(passport);
 const axios = require('axios');
 const port = process.env.PORT || 8080
@@ -56,14 +58,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
-    console.log(req.query.attraction_id)
-    try {
-        axios.post(`${YOUR_DOMAIN}/api/sessions/${req.query.session_id}?user_id=${req.session.passport.user}`)
-    } catch(err) {
-        console.log(err)
-    }
-
-    res.render('success.ejs')
+    // after payment received, we creates session record in database
+    return Session
+        .create(req.query.session_id, req.user.id)
+        .then(dbRes => {
+            console.log(`dbRes.rows[0]: ${dbRes.rows[0]}`)
+            return dbRes.rows[0]
+        })
+        .then(() => Session.findSessionById(req.query.session_id))
+        .then(dbRes => {
+            //after session created, we send email to customer
+                userSession = dbRes.rows[0];
+                 return sendMail(req.user.email, "Thank you for you booking",
+                    `
+                        <div>Thank you for you booking <span style="font-weight: bold;">${userSession.title}</span></div><br>
+                        <div>This session is: ${userSession.description}</div><br>
+                        <div>Your booking time is <span style="font-weight: bold;">${userSession.datetime.toString()}</span></div><br>
+                        <img src="${userSession.img}" alt="${userSession.title}"><br>    
+                     `);
+            }).catch(error => {
+                console.log(error)
+            }).finally(() => {
+                return res.status(200).render('success.ejs')
+            });
 });
 
 app.use('/', searchController)
