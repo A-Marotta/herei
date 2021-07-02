@@ -32,7 +32,7 @@ router.post('/api/create-checkout-session/:id', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/success?session_id=${sessionData.id}`,
+            success_url: `${YOUR_DOMAIN}/success?session_id=${sessionData.id}&attraction_id=${req.params.id}`,
             cancel_url: `${YOUR_DOMAIN}/attractions`,
             });
         

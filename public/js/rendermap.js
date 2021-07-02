@@ -21,7 +21,8 @@ function GetMap()
 
 function handleSearchCity(e) {
     e.preventDefault()
-
+    sessionView.style.display = 'none'
+    
     importMapLocations()
  
 }
@@ -66,7 +67,7 @@ function importSideAttractions(data) {
 
 }
 
-function createAttractionInfo(leftMenu, attractionView, data) {
+function createAttractionInfo(leftMenu, attractionView, data) {   
     attractionView.style.display = 'contents'
 
     let attraction = document.createElement('div')
@@ -211,11 +212,71 @@ function handleViewSession() {
     attractionView.style.display = 'none'
     sessionView.style.display = 'contents'
 
-    getUserSessions()
+    const sessions = getUserSessions().then(data => {
+        data.forEach(session => {
+            insertSessions(session)
+        })
+    })
 }
 
 function getUserSessions() {
-    console.log(req.session.passport.user)
+    const promise = axios.get(`http://localhost:8080/api/sessions/future/`)
+    const dataPromise = promise.then((response) => response.data)
+    return dataPromise  
+}
+
+function insertSessions(data) {
+    console.log(data)
+    let attraction = document.createElement('div')
+    attraction.className = 'attraction'
+
+    let attractionImgDiv =  document.createElement('div')
+    attractionImgDiv.className = 'attraction-image'
+
+    let attractionImg =  document.createElement('img')
+    attractionImg.className = 'attraction-image'
+    attractionImg.setAttribute("src", data.img)
+
+    sessionView
+        .appendChild(attraction)
+        .appendChild(attractionImgDiv)
+        .appendChild(attractionImg)
+
+    let attractionDetails = document.createElement('div')
+    attractionDetails.className = 'attraction-details'
+
+    let attractionTitle = document.createElement('h3')
+    attractionTitle.className = 'attraction-title'
+    attractionTitle.textContent = data.title
+
+    let attractionDescription = document.createElement('h4')
+    attractionDescription.className = 'attraction-description'
+    attractionDescription.textContent = data.description
+
+    let attractionSessions = document.createElement('p')
+    attractionSessions.className = 'attraction-sessions'
+    attractionSessions.setAttribute('name', 'session-datetime')
+    attractionDescription.textContent = formatSessionDateTime(data.datetime)
+
+    let deleteForm = document.createElement('form')
+    deleteForm.className = 'book-now-form'
+    deleteForm.method = 'POST'
+    deleteForm.action = `/api/create-checkout-session/${data.id}`
+
+    let attractionBookBtn = document.createElement('button')
+    attractionBookBtn.className = 'attraction-session-book'
+    attractionBookBtn.setAttribute('attraction-id', data.id)
+    attractionBookBtn.textContent = 'DELETE'
+    attractionBookBtn.setAttribute("type", "submit")
+
+    sessionView.appendChild(attraction)
+    attraction.appendChild(attractionDetails)
+    attractionDetails.appendChild(attractionTitle)
+    attractionDetails.appendChild(attractionDescription)
+    deleteForm.appendChild(attractionSessions)
+    
+    attractionDetails.appendChild(deleteForm)    
+    deleteForm.appendChild(attractionBookBtn)
 }
 
 // const session_id = document.querySelector('.attraction-sessions').value

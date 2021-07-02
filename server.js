@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
+    console.log(req.query.attraction_id)
     try {
         axios.post(`${YOUR_DOMAIN}/api/sessions/${req.query.session_id}?user_id=${req.session.passport.user}`)
     } catch(err) {
@@ -71,5 +72,5 @@ app.use('/', userController)
 app.use('/', sessionController)
 app.use("/", stripeController);
 //app.use(errorHandler) //***dt-taught error handler kept incase of issues with below*/
-app.use(logError)
-app.use(returnError)
+// app.use(logError)
+// app.use(returnError)
