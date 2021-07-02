@@ -22,14 +22,14 @@ router.get('/users/playground', (req, res) => {
 
 router.get('/users/logout', (req, res) => {
     req.logout();
-    req.flash('success_msg', 'You have logged out')
+    req.flash('success_msg', 'Thanks for looking, see you next time!')
     res.redirect('/users/login')
 });
 
 router.post(
     "/users/login",
     passport.authenticate("local", {
-        successRedirect: "/users/playground",
+        successRedirect: "/attractions",
         failureRedirect: "/users/login",
         failureFlash: true
     })
@@ -153,7 +153,7 @@ const sendEmail = async (email, subject, html) => {
 
 router.post('/email', async(req, res)=> {
     try {
-        await sendEmail("gigi.cai0310@gmail.com", "Verify Email", "Congratulations. Your email address is verified.");
+        await sendEmail("herei.global@gmail.com", "Verify Email", "Congratulations. Your email address is verified.");
         return res.status(200).send("done");
     } catch(error) {
         return res.status(404).send(error.toString());

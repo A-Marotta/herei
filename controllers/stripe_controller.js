@@ -6,31 +6,38 @@ const StripeModel = require('../models/stripe.js')
 
 const YOUR_DOMAIN = 'http://localhost:8080'
 
-router.post('/api/create-checkout-session/:id', async (req, res) => {
-    let attractionData = await StripeModel.findOne(req.params.id)
-    attractionData = attractionData.rows[0]
+router.post('/api/create-checkout-session/:id', async (req, res) => {   
+    let sessionData = await StripeModel.findOneSession(req.body['session-datetime'])
+    sessionData = sessionData.rows[0]
 
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [
-            {
-            price_data: {
-                currency: 'aud',
-                product_data: {
-                name: attractionData.title,
-                images: [attractionData.img],
-                },
-                unit_amount: `${attractionData.price}00`,
-            },
-            quantity: req.body['num-of-persons'],
-            },
-        ],
-        mode: 'payment',
-        success_url: `${YOUR_DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-        });
+    let attractionData = await StripeModel.findOneAttraction(req.params.id)
+    attractionData = attractionData.rows[0]
     
-    res.redirect(303, session.url)
+    if(!sessionData) {
+        console.log('no session data');
+    } else {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [
+                {
+                price_data: {
+                    currency: 'aud',
+                    product_data: {
+                    name: attractionData.title,
+                    images: [attractionData.img],
+                    },
+                    unit_amount: `${attractionData.price}00`,
+                },
+                quantity: req.body['num-of-persons'],
+                },
+            ],
+            mode: 'payment',
+            success_url: `${YOUR_DOMAIN}/success?session_id=${sessionData.id}`,
+            cancel_url: `${YOUR_DOMAIN}/attractions`,
+            });
+        
+        res.redirect(303, session.url)
+    }
 })
 
 module.exports = router;

@@ -12,9 +12,10 @@ router.get('/api/sessions/:id', (req, res) => {
 })
 
 router.post('/api/sessions/:session_id', (req, res) => {
+    console.log(req.query.user_id)
     try {
         Session
-            .create(req.params.session_id, 8)
+            .create(req.params.session_id, req.query.user_id)
             .then(dbRes => {
                 res.status(201).json({ 
                     session: dbRes.rows[0] 

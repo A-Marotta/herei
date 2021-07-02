@@ -4,8 +4,12 @@ const db = new Pool({
 })
 
 const Stripe = {
-    findOne: (id) => {
+    findOneAttraction: (id) => {
         const sql = 'SELECT * FROM attraction WHERE id = $1;'
+        return db.query(sql, [id])
+    },
+    findOneSession: (id) => {
+        const sql = 'SELECT * FROM session WHERE id = $1;'
         return db.query(sql, [id])
     }
 }

@@ -7,6 +7,7 @@ const flash = require('express-flash');
 const passport = require("passport");
 const initializePassport = require("./passportConfig");
 initializePassport(passport);
+const axios = require('axios');
 const port = process.env.PORT || 8080
 
 const YOUR_DOMAIN = 'http://localhost:8080';
@@ -47,12 +48,19 @@ const userController = require('./controllers/user_controller.js');
 const sessionController = require('./controllers/session_controller.js');
 const stripeController = require("./controllers/stripe_controller.js");
 
+
 //Routes
 app.get('/', (req, res) => {
     res.render('index.ejs')
 });
 
 app.get('/success', (req, res) => {
+    try {
+        axios.post(`${YOUR_DOMAIN}/api/sessions/${req.query.session_id}?user_id=${req.session.passport.user}`)
+    } catch(err) {
+        console.log(err)
+    }
+
     res.render('success.ejs')
 });
 
