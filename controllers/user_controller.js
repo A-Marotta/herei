@@ -122,13 +122,5 @@ router.get('/users/verify', async(req, res) => {
 
 });
 
-router.post('/email', async(req, res)=> {
-    try {
-        await sendEmail("herei.global@gmail.com", "Verify Email", "Congratulations. Your email address is verified.");
-        return res.status(200).send("done");
-    } catch(error) {
-        return res.status(404).send(error.toString());
-    }
-});
 
 module.exports = router
