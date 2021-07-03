@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const passport = require("passport");
-const nodemailer = require("nodemailer");
+const sendEmail = require("../email_notification/send");
 const initializePassport = require("../passportConfig");
 initializePassport(passport);
 const pool = require('../models/db')
@@ -121,35 +121,6 @@ router.get('/users/verify', async(req, res) => {
         });
 
 });
-
-const sendEmail = async (email, subject, html) => {
-    try {
-        console.log(process.env.SERVICE);
-        console.log(process.env.USER);
-        console.log(process.env.PASS);
-
-        const transporter = nodemailer.createTransport({
-            host: process.env.SERVICE,
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.PASS,
-            },
-        });
-
-        await transporter.sendMail({
-            from: `"HereI" <process.env.EMAIL_USER>`,
-            to: email,
-            subject: subject,
-            html: html,
-        });
-        console.log("email sent sucessfully");
-    } catch (error) {
-        console.log("email not sent");
-        console.log(error);
-    }
-};
 
 router.post('/email', async(req, res)=> {
     try {
