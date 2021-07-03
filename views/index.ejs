@@ -14,7 +14,11 @@
 <body>
     <div class="backgroundImg">
         <nav class="navbar">
-            <a class="nav-link" href="/users/login">Login</a>
+            <% if (link === 'Login') { %>
+                <a class="nav-link" href="/users/login"><%= link %></a> 
+            <% } else { %>
+                <a class="nav-link" href="/users/logout"><%= link %></a> 
+            <% } %>
         </nav>
 
         <div class="search-wrapper">

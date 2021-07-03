@@ -15,11 +15,6 @@ router.get('/users/login', (req, res) => {
     res.render('login.ejs')
 });
 
-router.get('/users/playground', (req, res) => {
-    console.log(req.user); // User session information
-    res.render('playground.ejs', { user: req.user.name })
-});
-
 router.get('/users/logout', (req, res) => {
     req.logout();
     req.flash('success_msg', 'Thanks for looking, see you next time!')

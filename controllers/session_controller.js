@@ -4,7 +4,6 @@ const Session = require('../models/session.js')
 
 router.get('/api/sessions/future', (req, res) => {
     const id = req.session.passport.user
-    console.log(id)
     try {
         Session
             .findUserSessions(id)
@@ -26,7 +25,6 @@ router.get('/api/sessions/:id', (req, res) => {
 })
 
 router.post('/api/sessions/:session_id', (req, res) => {
-    console.log(req.query.user_id)
     try {
         Session
             .create(req.params.session_id, req.query.user_id)

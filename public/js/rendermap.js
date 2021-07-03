@@ -244,8 +244,8 @@ function handleViewAttraction() {
 function handleViewSession() {
     attractionView.style.display = 'none'
     sessionView.style.display = 'contents'
-    console.log('hello')
-
+    removeChildren(sessionView);
+    
     const sessions = getUserSessions().then(data => {
         data.forEach(session => {
             insertSessions(session)
@@ -260,8 +260,6 @@ function getUserSessions() {
 }
 
 function insertSessions(data) {
-    removeChildren(sessionView);
-
     let attraction = document.createElement('div')
     attraction.className = 'attraction'
 
