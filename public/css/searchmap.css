@@ -214,3 +214,10 @@ form.searchAttraction input[type=text] {
 .disableEvent:hover {
     cursor: not-allowed;
 }
+
+.attraction-error {
+    font-weight: 300;
+    text-align: center;
+    color: #bf4d4d;
+    padding-top: 40px;
+}

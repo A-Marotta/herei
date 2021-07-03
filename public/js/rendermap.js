@@ -245,11 +245,17 @@ function handleViewSession() {
     attractionView.style.display = 'none'
     sessionView.style.display = 'contents'
     removeChildren(sessionView);
-    
-    const sessions = getUserSessions().then(data => {
+
+    const sessions = getUserSessions()
+    .then(data => {
         data.forEach(session => {
             insertSessions(session)
         })
+    })
+    .catch(err => {
+        if (err.response.status) {
+            setFutureSessionsError(err)
+        }
     })
 }
 
@@ -310,6 +316,24 @@ function insertSessions(data) {
     
     attractionDetails.appendChild(deleteForm)    
     deleteForm.appendChild(attractionBookBtn)
+}
+
+function setFutureSessionsError(err) {
+    let attraction = document.createElement('div')
+    attraction.className = 'attraction'
+
+    sessionView.appendChild(attraction)
+
+    let attractionDetails = document.createElement('div')
+    attractionDetails.className = 'attraction-details'
+
+    attraction.appendChild(attractionDetails)
+
+    let attractionTitle = document.createElement('h3')
+    attractionTitle.className = 'attraction-error'
+    attractionTitle.textContent = err.response.data.message.toUpperCase()
+
+    attractionDetails.appendChild(attractionTitle)
 }
 
 // const session_id = document.querySelector('.attraction-sessions').value
