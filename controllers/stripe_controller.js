@@ -12,9 +12,13 @@ router.post('/api/create-checkout-session/:id', async (req, res) => {
 
     let attractionData = await StripeModel.findOneAttraction(req.params.id)
     attractionData = attractionData.rows[0]
+
+    if(!req.user) {
+        res.redirect('/users/login')
+    }
     
     if(!sessionData) {
-        console.log('no session data');
+        return res.status(404).json({ message: "No session data" })
     } else {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],

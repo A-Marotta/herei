@@ -133,6 +133,11 @@ function createAttractionInfo(leftMenu, attractionView, data) {
     attractionSessions.className = 'attraction-sessions'
     attractionSessions.setAttribute('name', 'session-datetime')
     
+    let attractionBookBtn = document.createElement('button')
+    attractionBookBtn.className = 'attraction-session-book'
+    attractionBookBtn.setAttribute('attraction-id', data.id)
+    attractionBookBtn.textContent = 'BOOK NOW'
+    attractionBookBtn.setAttribute("type", "submit")
 
     getAttractionSessions(data.id).then(session =>  {
         if (session.length === 0) {
@@ -140,6 +145,7 @@ function createAttractionInfo(leftMenu, attractionView, data) {
             sessiontime.text = 'No available sessions'
             sessiontime.setAttribute("value", 0)
             attractionSessions.add(sessiontime)
+            attractionBookBtn.classList.add('disableEvent')
         } else {
             for ( var i = 0; i < session.length; i++) {
                 let sessiontime = document.createElement('option')
@@ -173,12 +179,6 @@ function createAttractionInfo(leftMenu, attractionView, data) {
     bookForm.className = 'book-now-form'
     bookForm.method = 'POST'
     bookForm.action = `/api/create-checkout-session/${data.id}`
-
-    let attractionBookBtn = document.createElement('button')
-    attractionBookBtn.className = 'attraction-session-book'
-    attractionBookBtn.setAttribute('attraction-id', data.id)
-    attractionBookBtn.textContent = 'BOOK NOW'
-    attractionBookBtn.setAttribute("type", "submit")
 
     attractionView.appendChild(attraction)
     attraction.appendChild(attractionDetails)
@@ -244,6 +244,7 @@ function handleViewAttraction() {
 function handleViewSession() {
     attractionView.style.display = 'none'
     sessionView.style.display = 'contents'
+    console.log('hello')
 
     const sessions = getUserSessions().then(data => {
         data.forEach(session => {
@@ -259,7 +260,8 @@ function getUserSessions() {
 }
 
 function insertSessions(data) {
-    console.log(data)
+    removeChildren(sessionView);
+
     let attraction = document.createElement('div')
     attraction.className = 'attraction'
 
