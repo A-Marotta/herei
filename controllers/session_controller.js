@@ -3,15 +3,19 @@ const router = express.Router()
 const Session = require('../models/session.js')
 
 router.get('/api/sessions/future', (req, res) => {
-    const id = req.session.passport.user
-    try {
-        Session
-            .findUserSessions(id)
-            .then(dbRes => {
-                res.status(200).json(dbRes.rows)
-            })
-    } catch(err) {
-        return res.status(500).json(err)
+    if(!req.user) {
+        return res.status(404).json({ message: "must be logged in to view upcoming sessions."})
+    } else {
+        const id = req.session.passport.user
+        try {
+            Session
+                .findUserSessions(id)
+                .then(dbRes => {
+                    res.status(200).json(dbRes.rows)
+                })
+        } catch(err) {
+            return res.status(500).json(err)
+        }
     }
 })
 
