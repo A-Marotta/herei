@@ -31,9 +31,31 @@ function importMapLocations() {
     var map = new Microsoft.Maps.Map(document.querySelector('#bingMap'), {
         zoom: 10
     });
+    removeChildren(attractionView);
     
     Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
         var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+
+        const infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false,
+        });
+
+        infobox.setMap(map);
+
+        // handle pin clicked event
+        const pushpinClicked = function (e) {
+            if (e.target.metadata) {
+                //Set the infobox options with the metadata of the pushpin.
+                infobox.setOptions({
+                    location: e.target.getLocation(),
+                    title: e.target.metadata.title,
+                    description: e.target.metadata.description,
+                    visible: true,
+                    showCloseButton: true,
+                });
+            }
+        };
+
         var requestOptions = {
             bounds: map.getBounds(),
             where: searchForm.value,
@@ -48,6 +70,12 @@ function importMapLocations() {
                             text: pin.id,
                             color: 'red'
                         });
+                        pinDetails.metadata = {
+                            title: pin.title,
+                            description: pin.description,
+                            img: pin.img
+                        };
+                        Microsoft.Maps.Events.addHandler(pinDetails, 'click', pushpinClicked);
                         map.entities.push(pinDetails);
 
                         importSideAttractions(pin)
@@ -57,8 +85,13 @@ function importMapLocations() {
                 })
             }
         };
+
         searchManager.geocode(requestOptions);
     });
+}
+
+function removeChildren(node) {
+    node.innerHTML = '';
 }
 
 function importSideAttractions(data) {
