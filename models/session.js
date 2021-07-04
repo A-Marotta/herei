@@ -26,12 +26,12 @@ const Session = {
     // Finding all sessions for a single user
     findUserSessions: (user_id) => {
         const sql = `
-            SELECT * FROM user_session
-            JOIN users ON (user_id = users.id)
+            SELECT * FROM user_session 
+            JOIN users ON (user_session.user_id = users.id)
             JOIN session ON (session_id = session.id)
             JOIN attraction ON (attraction_id = attraction.id)
             WHERE (
-            user_id = $1
+            user_session.user_id = $1
             AND 
             datetime >= NOW()
             );
