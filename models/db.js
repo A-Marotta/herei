@@ -16,4 +16,4 @@ if (process.env.PRODUCTION) {
   })
 }
 
-module.exports = pool
+module.exports = db
