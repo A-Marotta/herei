@@ -5,7 +5,7 @@ const { errorHandler } = require("../middlewares/error_handler.js")
 
 router.get('/api/sessions/future', (req, res) => {
     if(!req.user) {
-        errorHandler({statusCode: 404, message: "must be logged in to view upcoming sessions."}, req, res)
+        errorHandler({statusCode: 404, message: "You must be logged in to view upcoming sessions."}, req, res)
     } else {
         const id = req.session.passport.user
         try {
@@ -30,17 +30,16 @@ router.get('/api/sessions/:id', (req, res) => {
 })
 
 router.post('/api/sessions/:session_id', (req, res) => {
-    try {
-        Session
-            .create(req.params.session_id, req.query.user_id)
-            .then(dbRes => {
-                res.status(201).json({ 
-                    session: dbRes.rows[0] 
-                })
-            })
-    } catch(err) {
-        errorHandler({statusCode: 422, message: "failed"}, req, res)
+    if (!req.params.session_id || req.query.user_id) {
+        res.status(422).json({message: "Failed"})
     }
+    Session
+        .create(req.params.session_id, req.query.user_id)
+        .then(dbRes => {
+            res.status(201).json({ 
+                session: dbRes.rows[0] 
+            })
+        })
 })
 
 // router.delete('/api/sessions/:session_id', (req, res) => {
