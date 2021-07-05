@@ -44,7 +44,7 @@ app.use(express.json());
 // Controller
 const logger = require('./middlewares/logger.js');
 app.use(logger);
-const {logError, returnError} = require('./middlewares/error_handler.js')
+const {logError, returnError, errorHandler} = require('./middlewares/error_handler.js')
 const searchController = require('./controllers/search_controller.js');
 const bookingController = require('./controllers/booking_controller.js');
 const userController = require('./controllers/user_controller.js');
@@ -54,6 +54,8 @@ const stripeController = require("./controllers/stripe_controller.js");
 
 //Routes
 app.get('/', (req, res) => {
+    // console.log('hello')
+    // returnError({message:"this thing work"}, req, res)
     if (!req.user) {
         const link = 'Login'
         res.render('index.ejs', { link:link })
@@ -68,6 +70,6 @@ app.use('/', bookingController)
 app.use('/', userController)
 app.use('/', sessionController)
 app.use("/", stripeController);
-//app.use(errorHandler) //***dt-taught error handler kept incase of issues with below*/
-// app.use(logError)
-// app.use(returnError)
+app.use(logError)
+app.use(returnError)
+app.use(errorHandler)
