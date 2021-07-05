@@ -221,3 +221,15 @@ form.searchAttraction input[type=text] {
     color: #bf4d4d;
     padding-top: 40px;
 }
+
+.login-link {
+    padding: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 300;
+}
+
+.login-link:hover {
+    color: gray;
+}
