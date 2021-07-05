@@ -1,4 +1,6 @@
-# Web application to book travel attractions (HereI)
+# Web application to book travel attractions (HereI) <br/>
+![Alt text](/design-doc/AppImg.png)
+
 
 ### Introduction and technologies.
 A full stack app built for users to be able to book attractions prior to or whilst travelling.  
@@ -24,4 +26,9 @@ API integration also seen through the below:
 
 ### Design
   - Database: <br/>
-  ![Alt text](/design-docs/DB-Diagram.png?raw=true "Database")
+  ![Alt text](/design-doc/DB-Diagram.png)
+
+  - Wireframe
+  ![Alt text](/design-doc/HomeDesign.png)
+  <br/>
+  ![Alt text](/design-doc/SearchDesign.png)
