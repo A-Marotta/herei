@@ -3,43 +3,40 @@ const router = express.Router()
 const sendMail = require("../email_notification/send");
 const Booking = require('../models/booking.js')
 const Session = require('../models/session.js')
-const { errorHandler } = require('../middlewares/error_handler.js')
+// const { errorHandler } = require('../middlewares/error_handler.js')
 
 router.get('/api/bookings', (req, res) => {
-    try {
         let users_id = req.body.id
+        if (!users_id) {
+            res.status(422).json({message: "Need a user ID to view this info"})
+        }
         Booking
             .findAll(users_id)
             .then(dbRes => {
                 res.status(200).json(dbRes.rows)
         })
-    } catch (error) {
-        errorHandler({message: error}, req, res)
-    }
 })
 
 router.post('/api/bookings', (req, res) => {
-    try {
+    if (!req.body.users_id || !req.body.attraction_id) {
+        res.status(422).json({message: "Need a user ID to view this info"})
+    }
     Booking
         .create(req.body.attraction_id, req.body.users_id)
         .then(dbRes => {
             res.status(201).json(dbRes.rows[0])
         })
-    } catch (error) {
-        errorHandler({message: error}, req, res)
-    }
 })
 
 router.get('/api/bookings/:id', (req, res) => {
-    try {
+    if (!req.params.id) {
+        res.status(422).json({message: "Need a user ID to view this info"})
+    }
         Booking
             .findOne(req.params.id)
             .then(dbRes => {
                 res.status(200).json(dbRes.rows[0])
         })
-    } catch (error) {
-        errorHandler({message: error}, req, res)
-    }
 })
 // router.patch('/api/bookings/:id', (req, res) => {
 //     Booking
