@@ -28,7 +28,6 @@ API integration also seen through the below:
   - Database: <br/>
   ![Alt text](/design-doc/DB-Diagram.png)
 
-  - Wireframe<br/>
-  ![Alt text](/design-doc/HomeDesign.png)
-  <br/>
+  - Wireframe:<br/>
+  ![Alt text](/design-doc/HomeDesign.png)<br/>
   ![Alt text](/design-doc/SearchDesign.png)
