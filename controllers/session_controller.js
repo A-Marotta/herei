@@ -42,6 +42,20 @@ router.post('/api/sessions/:session_id', (req, res) => {
     }
 })
 
+// router.delete('/api/sessions/:session_id', (req, res) => {
+//     try {
+//         Session
+//             .create(req.params.session_id, req.query.user_id)
+//             .then(dbRes => {
+//                 res.status(201).json({ 
+//                     session: dbRes.rows[0] 
+//                 })
+//             })
+//     } catch(err) {
+//         return res.status(422).json({ message: "failed"})
+//     }
+// })
+
 
 
 module.exports = router

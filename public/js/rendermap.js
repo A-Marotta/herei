@@ -302,11 +302,11 @@ function insertSessions(data) {
     deleteForm.method = 'POST'
     deleteForm.action = `/api/create-checkout-session/${data.id}`
 
-    let attractionBookBtn = document.createElement('button')
-    attractionBookBtn.className = 'attraction-session-book'
-    attractionBookBtn.setAttribute('attraction-id', data.id)
-    attractionBookBtn.textContent = 'DELETE'
-    attractionBookBtn.setAttribute("type", "submit")
+    let sessionDeleteBtn = document.createElement('button')
+    sessionDeleteBtn.className = 'attraction-session-book'
+    sessionDeleteBtn.setAttribute('session-id', data.session_id)
+    sessionDeleteBtn.textContent = 'DELETE'
+    sessionDeleteBtn.setAttribute("type", "submit")
 
     sessionView.appendChild(attraction)
     attraction.appendChild(attractionDetails)
@@ -315,7 +315,7 @@ function insertSessions(data) {
     deleteForm.appendChild(attractionSessions)
     
     attractionDetails.appendChild(deleteForm)    
-    deleteForm.appendChild(attractionBookBtn)
+    // deleteForm.appendChild(sessionDeleteBtn)
 }
 
 function setFutureSessionsError(err) {
@@ -333,7 +333,13 @@ function setFutureSessionsError(err) {
     attractionTitle.className = 'attraction-error'
     attractionTitle.textContent = err.response.data.message.toUpperCase()
 
+    let loginLink = document.createElement('a')
+    loginLink.className = 'login-link'
+    loginLink.textContent = 'Click here to login'
+    loginLink.href = "/users/login"
+
     attractionDetails.appendChild(attractionTitle)
+    attractionDetails.appendChild(loginLink)
 }
 
 // const session_id = document.querySelector('.attraction-sessions').value
