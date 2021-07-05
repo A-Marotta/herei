@@ -1,14 +1,14 @@
 
-function logError (err) {
+function logError(err) {
     console.error(err)
 }
 
-function logErrorMiddleware (err, req, res, next) {
+function logErrorMiddleware(err, req, res, next) {
     logError(err)
     next(err)
 }
 
-function returnError (err, req, res, next) {
+function returnError(err, req, res, next) {
     res.status(err.statusCode || 500).send(err.message)
 }
 
@@ -19,20 +19,15 @@ function isOperationalError(error) {
     return false
 }
 
-// function errorHandler(err, req, res, next) { //***dt-taught error handler kept incase of issues with below*/
-
-//     let status = err.status || 500
-//     let message = err.message || 'Something went wrong'
-
-//     res.status(status).json({ message })
-
-//     next(err)
-// }
+function errorHandler(err, req, res, next) {
+    res.status(err.statusCode || 500).json(err.message)
+    next(err)
+}
 
 module.exports = {
     logError,
     logErrorMiddleware,
     returnError,
-    isOperationalError
-    // errorHandler, //***dt-taught error handler kept incase of issues with below*/
+    isOperationalError,
+    errorHandler
 }
