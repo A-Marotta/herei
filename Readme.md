@@ -6,6 +6,10 @@
 This website is deployed on [Heroku](https://thawing-basin-55117.herokuapp.com/)
 <br/>
 <br/>
+Test user account: <br/>
+Login: john@gmail.com <br/>
+Password: 123456 <br/>
+Search: Melbourne - (Melbourne has pre-populated data)
 
 
 ### Introduction and technologies.
