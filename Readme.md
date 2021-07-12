@@ -24,7 +24,7 @@ API integration also seen through the below:
   - Passport.js
 <br/>
 
-### Chanllege 
+### Challenge 
 
 * Working remotely as a team on the same git branch
 * Creating such a large project with so many routes and maintaining consistency across coding and design styles
